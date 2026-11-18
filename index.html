@@ -16,7 +16,7 @@
   <!-- Barra Superior de Anuncios y Moneda (MXN) -->
   <aside class="top-announcement-bar" aria-label="Aviso promocional">
     <div class="announcement-content">
-      <span>🎧 ¡Envío gratis a todo México en pedidos mayores a <strong class="shipping-threshold-text">$1,999 MXN</strong>! | Cupón <strong>ONLYMUSIC10</strong> para 10% OFF</span>
+      <span>🎧 ¡Envío gratis a todo México en compras mayores a <strong class="shipping-threshold-text">$1,999 MXN</strong>! | Cupón <strong>ONLYMUSIC10</strong> para 10% OFF</span>
       <div class="top-bar-controls">
         <label for="currency-selector" class="sr-only">Seleccionar moneda</label>
         <div class="currency-selector">
@@ -36,22 +36,22 @@
     </div>
   </aside>
 
-  <!-- Encabezado Original Recreado idéntico a las capturas -->
+  <!-- Encabezado Oficial OnlyMusic -->
   <header class="main-header" id="header">
     <div class="header-inner">
-      <div class="brand-container">
+      <div class="brand-container" onclick="navigateTo('hogar')" style="cursor: pointer;" title="Volver a la página inicial">
         <h2 class="brand-tagline">Siente el sonido</h2>
         <h1 class="brand-title">OnlyMusic - La marca de auriculares</h1>
       </div>
     </div>
   </header>
 
-  <!-- Barra de navegación con los botones rojos originales + Carrito -->
+  <!-- Barra de Navegación con Menús Independientes -->
   <nav class="sticky-nav" id="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
       <ul class="nav-menu">
         <li>
-          <a href="#hogar" class="nav-pill active" data-target="hogar">
+          <a href="#hogar" class="nav-pill active" data-page="hogar" onclick="navigateTo('hogar', event)">
             <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
             </svg>
@@ -59,15 +59,16 @@
           </a>
         </li>
         <li>
-          <a href="#almacenar" class="nav-pill" data-target="almacenar">
+          <!-- Solicitud: Nombre cambiado a "Catálogo de Productos" -->
+          <a href="#catalogo" class="nav-pill" data-page="catalogo" onclick="navigateTo('catalogo', event)">
             <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/>
             </svg>
-            <span>Almacenar</span>
+            <span>Catálogo de Productos</span>
           </a>
         </li>
         <li>
-          <a href="#sobre-nosotros" class="nav-pill" data-target="sobre-nosotros">
+          <a href="#sobre-nosotros" class="nav-pill" data-page="sobre-nosotros" onclick="navigateTo('sobre-nosotros', event)">
             <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
@@ -75,7 +76,7 @@
           </a>
         </li>
         <li>
-          <a href="#contactanos" class="nav-pill" data-target="contactanos">
+          <a href="#contactanos" class="nav-pill" data-page="contactanos" onclick="navigateTo('contactanos', event)">
             <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
             </svg>
@@ -95,7 +96,7 @@
     </div>
   </nav>
 
-  <!-- Subtítulo de marca en itálica (Capturas 1 y 3) -->
+  <!-- Subtítulo de marca en itálica (Original) -->
   <section class="brand-subtitle-section">
     <div class="container">
       <p class="brand-italic-banner">
@@ -104,350 +105,421 @@
     </div>
   </section>
 
-  <!-- SECCIÓN HOGAR: Slider Hero y Módulo de Lanzamiento -->
-  <main>
-    <section id="hogar" class="page-section hero-section">
-      <div class="container">
-        
-        <!-- Carrusel Hero: Audio Sphere & Pro X -->
-        <div class="carousel-wrapper">
-          <div class="carousel-track" id="hero-carousel">
-            
-            <!-- Slide 1: Audio Sphere (de la captura original) -->
-            <div class="carousel-slide active" data-slide="0">
-              <div class="hero-card audio-sphere-card">
-                <div class="audio-sphere-bg">
-                  <img src="assets/hero_audio_sphere.png" alt="AUDIO SPHERE 3D VECTOR SCULPTURE - OnlyMusic" class="hero-main-img" onerror="this.src='https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=1200&q=80'">
-                </div>
-                <div class="hero-content-overlay">
-                  <div class="hero-badge">EDICIÓN ESPECIAL 2026</div>
-                  <h2 class="hero-heading">AUDIO SPHERE</h2>
-                  <p class="hero-subtext">3D VECTOR SCULPTURE & SONIDO ESPACIAL 360°</p>
-                  <div class="hero-actions">
-                    <a href="#almacenar" class="btn-hero-primary" onclick="filterCategory('auriculares')">Explorar Auriculares</a>
-                    <button class="btn-hero-secondary" onclick="openProductModal('elite')">Ver Especificaciones</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <!-- ========================================================
+       CONTENIDO PRINCIPAL: PÁGINAS INDEPENDIENTES
+       ======================================================== -->
+  <main id="main-content">
 
-            <!-- Slide 2: OnlyMusic Pro X -->
-            <div class="carousel-slide" data-slide="1">
-              <div class="hero-card dark-tech-card">
-                <div class="tech-card-bg">
-                  <div class="tech-glow"></div>
-                </div>
-                <div class="hero-slide-grid">
-                  <div class="hero-slide-text">
-                    <span class="hero-tag-red">NUEVA GENERACIÓN ANC</span>
-                    <h2 class="hero-slide-title">OnlyMusic Pro X</h2>
-                    <p class="hero-slide-desc">Cancelación Activa de Ruido Híbrida de 42dB, drivers de titanio de 40mm y hasta 50 horas de autonomía ininterrumpida.</p>
-                    <div class="hero-spec-pills">
-                      <span>✓ Bluetooth 5.3</span>
-                      <span>✓ Audio Hi-Res LDAC</span>
-                      <span>✓ Carga Rápida USB-C</span>
-                    </div>
-                    <div class="hero-actions">
-                      <button class="btn-hero-primary" onclick="quickBuy('pro-x')">Comprar Ahora • <span class="price-val" data-base="2999">$2,999 MXN</span></button>
-                      <button class="btn-hero-secondary" onclick="openProductModal('pro-x')">Conocer Más</button>
-                    </div>
-                  </div>
-                  <div class="hero-slide-media">
-                    <img src="assets/product_pro_x.png" alt="OnlyMusic Pro X" class="floating-product-img">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 3: Bocinas Personales Bluetooth -->
-            <div class="carousel-slide" data-slide="2">
-              <div class="hero-card speaker-banner-card">
-                <div class="hero-slide-grid">
-                  <div class="hero-slide-text">
-                    <span class="hero-tag-green">NUEVA LÍNEA DE AUDIO PERSONAL</span>
-                    <h2 class="hero-slide-title">Bocinas Personales Bluetooth</h2>
-                    <p class="hero-slide-desc">Lleva tu música a todas partes con bajos profundos, resistencia al agua IPX7 y batería de larga duración para interiores y exteriores en México.</p>
-                    <div class="hero-spec-pills">
-                      <span>✓ Sonido 360° Omnidireccional</span>
-                      <span>✓ Resistencia al agua IPX7</span>
-                      <span>✓ Emparejamiento Estéreo TWS</span>
-                    </div>
-                    <div class="hero-actions">
-                      <a href="#almacenar" class="btn-hero-primary" onclick="filterCategory('bocinas')">Ver Colección de Bocinas</a>
-                    </div>
-                  </div>
-                  <div class="hero-slide-media">
-                    <img src="assets/product_bassboom_360.svg" alt="Bocinas Bluetooth OnlyMusic" class="floating-product-img speaker-glow">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Controles del Slider -->
-          <button class="carousel-control prev" id="carousel-prev" aria-label="Slide anterior">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-            </svg>
-          </button>
-          <button class="carousel-control next" id="carousel-next" aria-label="Slide siguiente">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-            </svg>
-          </button>
-
-          <!-- Indicadores de puntos -->
-          <div class="carousel-indicators" id="carousel-indicators">
-            <button class="indicator-dot active" data-index="0" aria-label="Ir al slide 1"></button>
-            <button class="indicator-dot" data-index="1" aria-label="Ir al slide 2"></button>
-            <button class="indicator-dot" data-index="2" aria-label="Ir al slide 3"></button>
-          </div>
-        </div>
-
-        <!-- Módulo Pop-up / Tarjeta de Lanzamiento Destacado (Captura 2) -->
-        <section class="featured-launch-container">
-          <div class="launch-card">
-            <div class="launch-image-wrapper">
-              <img src="assets/product_pro_x.png" alt="OnlyMusic Pro X Auriculares" class="launch-img">
-              <span class="launch-badge">OFERTA ESPECIAL</span>
-            </div>
-            <div class="launch-details">
-              <h3 class="launch-title">OnlyMusic Pro X</h3>
-              <p class="launch-callout">¡Nuevo lanzamiento! ¡Aprovecha la oferta ahora!</p>
-              <div class="launch-pricing">
-                <span class="original-price"><span class="price-val" data-base="3799">$3,799 MXN</span></span>
-                <span class="current-price"><span class="price-val" data-base="2999">$2,999 MXN</span></span>
-                <span class="discount-pill">-21% OFF</span>
-              </div>
-              <div class="launch-buttons">
-                <button class="btn-cyan-click" onclick="openOfferModal('pro-x')">haga clic aquí</button>
-                <button class="btn-green-buy" onclick="quickBuy('pro-x')">* Comprar ahora *</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-      </div>
-    </section>
-
-    <!-- SECCIÓN ALMACENAR: Tienda Virtual y Catálogo de Auriculares y Bocinas -->
-    <section id="almacenar" class="page-section store-section">
-      <div class="container">
-        
-        <div class="section-header">
-          <div class="header-pre-title">CATÁLOGO OFICIAL MÉXICO</div>
-          <h2 class="section-title">Nuestra Tienda Virtual OnlyMusic</h2>
-          <p class="section-description">
-            Descubre nuestra línea completa de <strong>auriculares Bluetooth</strong> con sonido envolvente y nuestras nuevas <strong>bocinas personales Bluetooth</strong> con precios en Pesos Mexicanos (MXN) y meses sin intereses.
-          </p>
-        </div>
-
-        <!-- Filtros de categoría y Barra de Búsqueda -->
-        <div class="store-toolbar">
-          <div class="category-filters" role="tablist">
-            <button class="filter-btn active" data-category="all" role="tab" aria-selected="true">Todos los Productos</button>
-            <button class="filter-btn" data-category="auriculares" role="tab" aria-selected="false">🎧 Auriculares Bluetooth</button>
-            <button class="filter-btn" data-category="bocinas" role="tab" aria-selected="false">🔊 Bocinas Personales Bluetooth</button>
-            <button class="filter-btn" data-category="gamer" role="tab" aria-selected="false">🎮 Gaming 7.1</button>
-            <button class="filter-btn" data-category="premium" role="tab" aria-selected="false">⭐ Serie Elite</button>
-          </div>
+    <!-- ============================================== -->
+    <!-- PÁGINA 1: HOGAR (Página Inicial Independiente)  -->
+    <!-- ============================================== -->
+    <div id="page-hogar" class="page-view active" role="region" aria-label="Página de Inicio">
+      <section class="hero-section">
+        <div class="container">
           
-          <div class="store-search-box">
-            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-            </svg>
-            <input type="text" id="product-search-input" placeholder="Buscar auriculares, bocinas, modelos..." aria-label="Buscar producto">
-          </div>
-        </div>
-
-        <!-- Grid de Productos con Precios en Pesos Mexicanos (MXN) -->
-        <div class="products-grid" id="products-grid">
-          <!-- Renderizado dinámico vía JavaScript -->
-        </div>
-
-        <!-- Beneficios y Garantías -->
-        <div class="store-perks-row">
-          <div class="perk-box">
-            <div class="perk-icon">🚚</div>
-            <div class="perk-text">
-              <h4>Envío Rápido a Todo México</h4>
-              <p>Entregas seguras por paquetería con número de rastreo incluido.</p>
-            </div>
-          </div>
-          <div class="perk-box">
-            <div class="perk-icon">🛡️</div>
-            <div class="perk-text">
-              <h4>Garantía Directa de 1 Año</h4>
-              <p>Soporte técnico y reemplazo inmediato sin complicaciones.</p>
-            </div>
-          </div>
-          <div class="perk-box">
-            <div class="perk-icon">💳</div>
-            <div class="perk-text">
-              <h4>Pagos en Pesos (MXN) y MSI</h4>
-              <p>Tarjetas de crédito y débito Visa, Mastercard, AMEX con opción a 3, 6 y 12 meses sin intereses.</p>
-            </div>
-          </div>
-          <div class="perk-box">
-            <div class="perk-icon">🎧</div>
-            <div class="perk-text">
-              <h4>Calidad de Audio de Estudio</h4>
-              <p>Drivers calibrados por ingenieros de sonido profesionales.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECCIÓN SOBRE NOSOTROS: Capturas 7 y 6 -->
-    <section id="sobre-nosotros" class="page-section about-section">
-      <div class="container">
-        
-        <article class="about-card">
-          <h2 class="about-title">Acerca de OnlyMusic</h2>
-          
-          <div class="about-body-text">
-            <p>
-              En <strong>OnlyMusic – The Headphone Brand</strong>, creemos que el sonido es más que algo que se oye: es algo que se siente. Nuestra misión es ofrecer experiencias de audio impactantes que den vida a cada ritmo, nota y detalle. Diseñados para amantes de la música, gamers y creadores, los auriculares OnlyMusic combinan un diseño moderno, graves profundos y un sonido nítido para brindarte una experiencia auditiva inmersiva.
-            </p>
-            
-            <p>
-              Nos centramos en crear auriculares que no solo suenen de maravilla, sino que también ofrezcan comodidad y durabilidad para el uso diario. Ya sea que estés jugando, trabajando, viajando o relajándote con tu lista de reproducción favorita, OnlyMusic te garantiza una conexión total con el sonido que te apasiona.
-            </p>
-            
-            <p>
-              Nuestros productos están elaborados con tecnología de audio avanzada, materiales de primera calidad y diseños elegantes que se adaptan al estilo de vida de la generación actual. Desde graves potentes hasta una calidad de voz nítida, los auriculares OnlyMusic están diseñados para ofrecer un alto rendimiento sin sacrificar la comodidad.
-            </p>
-            
-            <p>
-              En OnlyMusic, la innovación y la calidad son la base de todo lo que creamos. Trabajamos continuamente para mejorar nuestros productos y que cada oyente pueda experimentar el sonido en su forma más pura.
-            </p>
-
-            <blockquote class="about-quote">
-              Siente el poder. Siente la claridad. Siente el sonido.
-            </blockquote>
-          </div>
-
-          <!-- Subsección Nuestra Misión y Formulario de Inscripción (Captura 6) -->
-          <div class="mission-section">
-            <h3 class="mission-title">Nuestra misión</h3>
-            <p class="mission-text">
-              Nuestra misión es crear auriculares de alta calidad que combinen rendimiento, estilo y precio accesible. Buscamos brindar a los usuarios una experiencia de audio excepcional que mejore la música, los videojuegos y la escucha cotidiana.
-            </p>
-
-            <!-- Formulario de Suscripción idéntico a la captura -->
-            <form id="mission-subscribe-form" class="subscribe-form" onsubmit="handleMissionSubscribe(event)">
-              <div class="form-group">
-                <label for="subscribe-phone">Número de teléfono</label>
-                <input type="tel" id="subscribe-phone" class="form-control" placeholder="123" required>
-              </div>
-
-              <div class="form-group">
-                <label for="subscribe-email">Dirección de correo electrónico:</label>
-                <input type="email" id="subscribe-email" class="form-control" placeholder="Su dirección de correo electrónico" required>
-              </div>
-
-              <div class="form-action">
-                <button type="submit" class="btn-blue-action">Inscribirse</button>
-              </div>
-            </form>
-          </div>
-
-        </article>
-
-      </div>
-    </section>
-
-    <!-- SECCIÓN CONTÁCTANOS: Capturas 4 y 5 -->
-    <section id="contactanos" class="page-section contact-section">
-      <div class="container">
-        
-        <div class="contact-card">
-          <h2 class="contact-title">Contáctanos</h2>
-          
-          <p class="contact-intro">
-            ¡Nos encantaría saber de ti! Si tienes alguna pregunta sobre nuestros productos, necesitas asistencia o quieres compartir tus comentarios, el <strong>equipo de OnlyMusic</strong> está aquí para ayudarte. Nuestro objetivo es brindar la mejor experiencia a cada cliente, así que no dudes en contactarnos cuando quieras.
-          </p>
-
-          <div class="contact-grid">
-            
-            <!-- Soporte al Cliente -->
-            <div class="support-info-block">
-              <h3 class="support-heading">Soporte al cliente</h3>
+          <!-- Carrusel Hero: Audio Sphere & Pro X -->
+          <div class="carousel-wrapper">
+            <div class="carousel-track" id="hero-carousel">
               
-              <ul class="support-details-list">
-                <li>
-                  <div class="info-label">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    <strong>Correo electrónico:</strong>
+              <!-- Slide 1: Audio Sphere (de la captura original) -->
+              <div class="carousel-slide active" data-slide="0">
+                <div class="hero-card audio-sphere-card">
+                  <div class="audio-sphere-bg">
+                    <img src="assets/hero_audio_sphere.png" alt="AUDIO SPHERE 3D VECTOR SCULPTURE - OnlyMusic" class="hero-main-img" onerror="this.src='https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=1200&q=80'">
                   </div>
-                  <a href="mailto:onlymusic820842@gmail.com" class="support-link">onlymusic820842@gmail.com</a>
-                </li>
-                <li>
-                  <div class="info-label">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                    <strong>Teléfono de atención:</strong>
+                  <div class="hero-content-overlay">
+                    <div class="hero-badge">EDICIÓN ESPECIAL 2026</div>
+                    <h2 class="hero-heading">AUDIO SPHERE</h2>
+                    <p class="hero-subtext">3D VECTOR SCULPTURE & SONIDO ESPACIAL 360°</p>
+                    <div class="hero-actions">
+                      <button class="btn-hero-primary" onclick="navigateTo('catalogo', null, 'auriculares')">Explorar Auriculares</button>
+                      <button class="btn-hero-secondary" onclick="openProductModal('elite')">Ver Especificaciones</button>
+                    </div>
                   </div>
-                  <a href="tel:+525598765432" class="support-link">+52 (55) 9876-5432 / +91 98765 43210</a>
-                </li>
-                <li>
-                  <div class="info-label">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    <strong>Dirección:</strong>
-                  </div>
-                  <span class="support-text">Ciudad de México, México / Pune, Maharashtra, India</span>
-                </li>
-              </ul>
-
-              <div class="support-badge">
-                <span class="status-dot"></span>
-                <span>Atención disponible: Lunes a Sábado 9:00 - 19:00 (Hora del Centro)</span>
+                </div>
               </div>
+
+              <!-- Slide 2: OnlyMusic Pro X -->
+              <div class="carousel-slide" data-slide="1">
+                <div class="hero-card dark-tech-card">
+                  <div class="tech-card-bg">
+                    <div class="tech-glow"></div>
+                  </div>
+                  <div class="hero-slide-grid">
+                    <div class="hero-slide-text">
+                      <span class="hero-tag-red">NUEVA GENERACIÓN ANC</span>
+                      <h2 class="hero-slide-title">OnlyMusic Pro X</h2>
+                      <p class="hero-slide-desc">Cancelación Activa de Ruido Híbrida de 42dB, drivers de titanio de 40mm y hasta 50 horas de autonomía ininterrumpida.</p>
+                      <div class="hero-spec-pills">
+                        <span>✓ Bluetooth 5.3</span>
+                        <span>✓ Audio Hi-Res LDAC</span>
+                        <span>✓ Carga Rápida USB-C</span>
+                      </div>
+                      <div class="hero-actions">
+                        <button class="btn-hero-primary" onclick="quickBuy('pro-x')">Comprar Ahora • <span class="price-val" data-base="2999">$2,999 MXN</span></button>
+                        <button class="btn-hero-secondary" onclick="openProductModal('pro-x')">Conocer Más</button>
+                      </div>
+                    </div>
+                    <div class="hero-slide-media">
+                      <img src="assets/product_pro_x.png" alt="OnlyMusic Pro X" class="floating-product-img">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3: Bocinas Personales Bluetooth -->
+              <div class="carousel-slide" data-slide="2">
+                <div class="hero-card speaker-banner-card">
+                  <div class="hero-slide-grid">
+                    <div class="hero-slide-text">
+                      <span class="hero-tag-green">NUEVA LÍNEA DE AUDIO PERSONAL</span>
+                      <h2 class="hero-slide-title">Bocinas Personales Bluetooth</h2>
+                      <p class="hero-slide-desc">Lleva tu música a todas partes con bajos profundos, resistencia al agua IPX7 y batería de larga duración para interiores y exteriores en México.</p>
+                      <div class="hero-spec-pills">
+                        <span>✓ Sonido 360° Omnidireccional</span>
+                        <span>✓ Resistencia al agua IPX7</span>
+                        <span>✓ Emparejamiento Estéreo TWS</span>
+                      </div>
+                      <div class="hero-actions">
+                        <button class="btn-hero-primary" onclick="navigateTo('catalogo', null, 'bocinas')">Ver Colección de Bocinas</button>
+                      </div>
+                    </div>
+                    <div class="hero-slide-media">
+                      <img src="assets/product_bassboom_360.svg" alt="Bocinas Bluetooth OnlyMusic" class="floating-product-img speaker-glow">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
-            <!-- Formulario de Contacto idéntico con Nombre (Primero, Último) -->
-            <div class="contact-form-block">
-              <form id="contact-main-form" class="main-contact-form" onsubmit="handleContactSubmit(event)">
-                
+            <!-- Controles del Slider -->
+            <button class="carousel-control prev" id="carousel-prev" aria-label="Slide anterior">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+              </svg>
+            </button>
+            <button class="carousel-control next" id="carousel-next" aria-label="Slide siguiente">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+              </svg>
+            </button>
+
+            <!-- Indicadores de puntos -->
+            <div class="carousel-indicators" id="carousel-indicators">
+              <button class="indicator-dot active" data-index="0" aria-label="Ir al slide 1"></button>
+              <button class="indicator-dot" data-index="1" aria-label="Ir al slide 2"></button>
+              <button class="indicator-dot" data-index="2" aria-label="Ir al slide 3"></button>
+            </div>
+          </div>
+
+          <!-- Módulo Pop-up / Tarjeta de Lanzamiento Destacado (Captura 2) -->
+          <section class="featured-launch-container">
+            <div class="launch-card">
+              <div class="launch-image-wrapper">
+                <img src="assets/product_pro_x.png" alt="OnlyMusic Pro X Auriculares" class="launch-img">
+                <span class="launch-badge">OFERTA ESPECIAL</span>
+              </div>
+              <div class="launch-details">
+                <h3 class="launch-title">OnlyMusic Pro X</h3>
+                <p class="launch-callout">¡Nuevo lanzamiento! ¡Aprovecha la oferta ahora!</p>
+                <div class="launch-pricing">
+                  <span class="original-price"><span class="price-val" data-base="3799">$3,799 MXN</span></span>
+                  <span class="current-price"><span class="price-val" data-base="2999">$2,999 MXN</span></span>
+                  <span class="discount-pill">-21% OFF</span>
+                </div>
+                <div class="launch-buttons">
+                  <button class="btn-cyan-click" onclick="openOfferModal('pro-x')">haga clic aquí</button>
+                  <button class="btn-green-buy" onclick="quickBuy('pro-x')">* Comprar ahora *</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Banner de Acceso Rápido al Catálogo Completo -->
+          <section class="home-catalog-cta">
+            <h3>¿Listo para experimentar el sonido de alta definición?</h3>
+            <p>Explora nuestra línea completa de Auriculares Bluetooth y Bocinas Personales con envío gratuito a todo México.</p>
+            <div class="home-cta-buttons">
+              <button class="btn-hero-primary" onclick="navigateTo('catalogo')">Ver Catálogo de Productos Completo</button>
+              <button class="btn-hero-secondary" style="color: #0f172a; border-color: #cbd5e1;" onclick="navigateTo('sobre-nosotros')">Conocer Nuestra Historia</button>
+            </div>
+          </section>
+
+        </div>
+      </section>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- PÁGINA 2: CATÁLOGO DE PRODUCTOS (Independiente)-->
+    <!-- ============================================== -->
+    <div id="page-catalogo" class="page-view" role="region" aria-label="Catálogo de Productos">
+      
+      <!-- Encabezado de la página de Catálogo -->
+      <div class="page-banner-header">
+        <div class="container">
+          <div class="breadcrumb">
+            <a onclick="navigateTo('hogar')">Hogar</a>
+            <span>/</span>
+            <span>Catálogo de Productos</span>
+          </div>
+          <h2 class="page-title">Catálogo de Productos OnlyMusic</h2>
+          <p class="page-subtitle">Descubre nuestra variedad oficial de Auriculares Bluetooth y Bocinas Personales Inalámbricas con precios en Pesos Mexicanos (MXN) y meses sin intereses.</p>
+        </div>
+      </div>
+
+      <section class="store-section" style="padding-top: 10px;">
+        <div class="container">
+          
+          <!-- Filtros de categoría y Barra de Búsqueda -->
+          <div class="store-toolbar">
+            <div class="category-filters" role="tablist">
+              <button class="filter-btn active" data-category="all" role="tab" aria-selected="true">Todos los Productos</button>
+              <button class="filter-btn" data-category="auriculares" role="tab" aria-selected="false">🎧 Auriculares Bluetooth</button>
+              <button class="filter-btn" data-category="bocinas" role="tab" aria-selected="false">🔊 Bocinas Personales Bluetooth</button>
+              <button class="filter-btn" data-category="gamer" role="tab" aria-selected="false">🎮 Gaming 7.1</button>
+              <button class="filter-btn" data-category="premium" role="tab" aria-selected="false">⭐ Serie Elite</button>
+            </div>
+            
+            <div class="store-search-box">
+              <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+              </svg>
+              <input type="text" id="product-search-input" placeholder="Buscar auriculares, bocinas, modelos..." aria-label="Buscar producto">
+            </div>
+          </div>
+
+          <!-- Grid de Productos -->
+          <div class="products-grid" id="products-grid">
+            <!-- Renderizado dinámico vía JavaScript -->
+          </div>
+
+          <!-- Beneficios y Garantías -->
+          <div class="store-perks-row">
+            <div class="perk-box">
+              <div class="perk-icon">🚚</div>
+              <div class="perk-text">
+                <h4>Envío Rápido a Todo México</h4>
+                <p>Entregas seguras por paquetería con número de rastreo incluido.</p>
+              </div>
+            </div>
+            <div class="perk-box">
+              <div class="perk-icon">🛡️</div>
+              <div class="perk-text">
+                <h4>Garantía Directa de 1 Año</h4>
+                <p>Soporte técnico y reemplazo inmediato sin complicaciones.</p>
+              </div>
+            </div>
+            <div class="perk-box">
+              <div class="perk-icon">💳</div>
+              <div class="perk-text">
+                <h4>Pagos en Pesos (MXN) y MSI</h4>
+                <p>Tarjetas de crédito y débito Visa, Mastercard, AMEX con opción a 3, 6 y 12 meses sin intereses.</p>
+              </div>
+            </div>
+            <div class="perk-box">
+              <div class="perk-icon">🎧</div>
+              <div class="perk-text">
+                <h4>Calidad de Audio de Estudio</h4>
+                <p>Drivers calibrados por ingenieros de sonido profesionales.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- PÁGINA 3: SOBRE NOSOTROS (Independiente)        -->
+    <!-- ============================================== -->
+    <div id="page-sobre-nosotros" class="page-view" role="region" aria-label="Sobre Nosotros">
+      
+      <!-- Encabezado de la página Sobre Nosotros -->
+      <div class="page-banner-header">
+        <div class="container">
+          <div class="breadcrumb">
+            <a onclick="navigateTo('hogar')">Hogar</a>
+            <span>/</span>
+            <span>Sobre Nosotros</span>
+          </div>
+          <h2 class="page-title">Sobre Nosotros</h2>
+          <p class="page-subtitle">Conoce la historia, pasión y compromiso acústico detrás de OnlyMusic – The Headphone Brand.</p>
+        </div>
+      </div>
+
+      <section class="about-section" style="padding-top: 10px;">
+        <div class="container">
+          
+          <article class="about-card">
+            <h2 class="about-title">Acerca de OnlyMusic</h2>
+            
+            <div class="about-body-text">
+              <p>
+                En <strong>OnlyMusic – The Headphone Brand</strong>, creemos que el sonido es más que algo que se oye: es algo que se siente. Nuestra misión es ofrecer experiencias de audio impactantes que den vida a cada ritmo, nota y detalle. Diseñados para amantes de la música, gamers y creadores, los auriculares OnlyMusic combinan un diseño moderno, graves profundos y un sonido nítido para brindarte una experiencia auditiva inmersiva.
+              </p>
+              
+              <p>
+                Nos centramos en crear auriculares que no solo suenen de maravilla, sino que también ofrezcan comodidad y durabilidad para el uso diario. Ya sea que estés jugando, trabajando, viajando o relajándote con tu lista de reproducción favorita, OnlyMusic te garantiza una conexión total con el sonido que te apasiona.
+              </p>
+              
+              <p>
+                Nuestros productos están elaborados con tecnología de audio avanzada, materiales de primera calidad y diseños elegantes que se adaptan al estilo de vida de la generación actual. Desde graves potentes hasta una calidad de voz nítida, los auriculares OnlyMusic están diseñados para ofrecer un alto rendimiento sin sacrificar la comodidad.
+              </p>
+              
+              <p>
+                En OnlyMusic, la innovación y la calidad son la base de todo lo que creamos. Trabajamos continuamente para mejorar nuestros productos y que cada oyente pueda experimentar el sonido en su forma más pura.
+              </p>
+
+              <blockquote class="about-quote">
+                Siente el poder. Siente la claridad. Siente el sonido.
+              </blockquote>
+            </div>
+
+            <!-- Subsección Nuestra Misión y Formulario de Inscripción (Captura 6) -->
+            <div class="mission-section">
+              <h3 class="mission-title">Nuestra misión</h3>
+              <p class="mission-text">
+                Nuestra misión es crear auriculares de alta calidad que combinen rendimiento, estilo y precio accesible. Buscamos brindar a los usuarios una experiencia de audio excepcional que mejore la música, los videojuegos y la escucha cotidiana.
+              </p>
+
+              <!-- Formulario de Suscripción idéntico a la captura -->
+              <form id="mission-subscribe-form" class="subscribe-form" onsubmit="handleMissionSubscribe(event)">
                 <div class="form-group">
-                  <label class="field-label">Nombre <span class="required-star">*</span></label>
-                  <div class="name-split-row">
-                    <div class="name-col">
-                      <input type="text" id="contact-first-name" class="form-control" placeholder="Ej. Carlos" required>
-                      <small class="sub-label">Primero</small>
-                    </div>
-                    <div class="name-col">
-                      <input type="text" id="contact-last-name" class="form-control" placeholder="Ej. Hernández" required>
-                      <small class="sub-label">Último</small>
-                    </div>
-                  </div>
+                  <label for="subscribe-phone">Número de teléfono</label>
+                  <input type="tel" id="subscribe-phone" class="form-control" placeholder="123" required>
                 </div>
 
                 <div class="form-group">
-                  <label for="contact-email" class="field-label">Correo electrónico <span class="required-star">*</span></label>
-                  <input type="email" id="contact-email" class="form-control" placeholder="tu.correo@ejemplo.com" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="contact-message" class="field-label">Comentario o mensaje</label>
-                  <textarea id="contact-message" class="form-control textarea-field" rows="5" placeholder="Escribe tu mensaje o consulta..." required></textarea>
+                  <label for="subscribe-email">Dirección de correo electrónico:</label>
+                  <input type="email" id="subscribe-email" class="form-control" placeholder="Su dirección de correo electrónico" required>
                 </div>
 
                 <div class="form-action">
-                  <button type="submit" class="btn-blue-action" id="btn-submit-contact">Entregar</button>
+                  <button type="submit" class="btn-blue-action">Inscribirse</button>
                 </div>
-
               </form>
+            </div>
+
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- PÁGINA 4: CONTÁCTANOS (Independiente)           -->
+    <!-- ============================================== -->
+    <div id="page-contactanos" class="page-view" role="region" aria-label="Contáctanos">
+      
+      <!-- Encabezado de la página Contáctanos -->
+      <div class="page-banner-header">
+        <div class="container">
+          <div class="breadcrumb">
+            <a onclick="navigateTo('hogar')">Hogar</a>
+            <span>/</span>
+            <span>Contáctanos</span>
+          </div>
+          <h2 class="page-title">Contáctanos</h2>
+          <p class="page-subtitle">Estamos a tu disposición para resolver dudas, brindar soporte técnico o dar seguimiento a tus compras.</p>
+        </div>
+      </div>
+
+      <section class="contact-section" style="padding-top: 10px;">
+        <div class="container">
+          
+          <div class="contact-card">
+            <h2 class="contact-title" style="display: none;">Contáctanos</h2>
+            
+            <p class="contact-intro">
+              ¡Nos encantaría saber de ti! Si tienes alguna pregunta sobre nuestros productos, necesitas asistencia o quieres compartir tus comentarios, el <strong>equipo de OnlyMusic</strong> está aquí para ayudarte. Nuestro objetivo es brindar la mejor experiencia a cada cliente, así que no dudes en contactarnos cuando quieras.
+            </p>
+
+            <div class="contact-grid">
+              
+              <!-- Soporte al Cliente -->
+              <div class="support-info-block">
+                <h3 class="support-heading">Soporte al cliente</h3>
+                
+                <ul class="support-details-list">
+                  <li>
+                    <div class="info-label">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                      <strong>Correo electrónico:</strong>
+                    </div>
+                    <a href="mailto:onlymusic820842@gmail.com" class="support-link">onlymusic820842@gmail.com</a>
+                  </li>
+                  <li>
+                    <div class="info-label">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                      <strong>Teléfono de atención:</strong>
+                    </div>
+                    <a href="tel:+525598765432" class="support-link">+52 (55) 9876-5432 / +91 98765 43210</a>
+                  </li>
+                  <li>
+                    <div class="info-label">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                      <strong>Dirección:</strong>
+                    </div>
+                    <span class="support-text">Ciudad de México, México / Pune, Maharashtra, India</span>
+                  </li>
+                </ul>
+
+                <div class="support-badge">
+                  <span class="status-dot"></span>
+                  <span>Atención disponible: Lunes a Sábado 9:00 - 19:00 (Hora del Centro)</span>
+                </div>
+              </div>
+
+              <!-- Formulario de Contacto idéntico con Nombre (Primero, Último) -->
+              <div class="contact-form-block">
+                <form id="contact-main-form" class="main-contact-form" onsubmit="handleContactSubmit(event)">
+                  
+                  <div class="form-group">
+                    <label class="field-label">Nombre <span class="required-star">*</span></label>
+                    <div class="name-split-row">
+                      <div class="name-col">
+                        <input type="text" id="contact-first-name" class="form-control" placeholder="Ej. Carlos" required>
+                        <small class="sub-label">Primero</small>
+                      </div>
+                      <div class="name-col">
+                        <input type="text" id="contact-last-name" class="form-control" placeholder="Ej. Hernández" required>
+                        <small class="sub-label">Último</small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="contact-email" class="field-label">Correo electrónico <span class="required-star">*</span></label>
+                    <input type="email" id="contact-email" class="form-control" placeholder="tu.correo@ejemplo.com" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="contact-message" class="field-label">Comentario o mensaje</label>
+                    <textarea id="contact-message" class="form-control textarea-field" rows="5" placeholder="Escribe tu mensaje o consulta..." required></textarea>
+                  </div>
+
+                  <div class="form-action">
+                    <button type="submit" class="btn-blue-action" id="btn-submit-contact">Entregar</button>
+                  </div>
+
+                </form>
+              </div>
+
             </div>
 
           </div>
 
         </div>
+      </section>
 
-      </div>
-    </section>
+    </div>
+
   </main>
 
   <!-- PIE DE PÁGINA (Footer) idéntico a las capturas -->
@@ -481,7 +553,7 @@
     </div>
   </footer>
 
-  <!-- Botón Flotante para Volver al Inicio (Captura original) -->
+  <!-- Botón Flotante para Volver al Inicio -->
   <button id="scroll-to-top" class="scroll-top-btn" title="Subir al inicio" aria-label="Subir al inicio">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
       <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
@@ -699,7 +771,7 @@
                       <div class="card-cvv-box" id="display-card-cvv">•••</div>
                     </div>
                     <div class="card-back-text">
-                      Esta tarjeta es procesada mediante protocolo seguro SSL y tokenización bancaria bancaria para OnlyMusic Store México.
+                      Esta tarjeta es procesada mediante protocolo seguro SSL y tokenización bancaria para OnlyMusic Store México.
                     </div>
                   </div>
 

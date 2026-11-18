@@ -1,6 +1,7 @@
 /**
- * ONLYMUSIC - E-COMMERCE & TIENDA VIRTUAL (VERSIÓN PESOS MEXICANOS MXN)
+ * ONLYMUSIC - E-COMMERCE & TIENDA VIRTUAL (PÁGINAS INDEPENDIENTES)
  * Lógica completa de catálogo, carrito, pasarela de pago interactiva con tarjeta 3D,
+ * enrutador de páginas independientes (Hogar, Catálogo de Productos, Sobre Nosotros, Contáctanos),
  * carrusel de inicio, filtros y efectos de sonido.
  */
 
@@ -92,7 +93,7 @@ const PRODUCTS = [
     },
     description: 'La máxima expresión del lujo acústico de OnlyMusic. Acabado en oro rosa, detalles artesanales y un sonido con certificación Hi-Res Audio.'
   },
-  // --- Bocinas Personales Bluetooth (Requerimiento especial del usuario) ---
+  // --- Bocinas Personales Bluetooth (Requerimiento especial) ---
   {
     id: 'bassboom-360',
     name: 'OnlyMusic BassBoom 360',
@@ -177,10 +178,11 @@ const PRODUCTS = [
   }
 ];
 
-// --- Estado Global de la Aplicación (Default: MXN) ---
+// --- Estado Global de la Aplicación ---
 const AppState = {
+  currentPage: 'hogar',
   cart: [],
-  currency: 'MXN', // Pesos Mexicanos por defecto
+  currency: 'MXN', // Pesos Mexicanos
   currencyRates: {
     MXN: { symbol: '$', suffix: ' MXN', rate: 1, decimals: 0 },
     USD: { symbol: '$', suffix: ' USD', rate: 0.055, decimals: 2 },
@@ -194,6 +196,84 @@ const AppState = {
   currentSlide: 0,
   carouselTimer: null
 };
+
+// --- ENRUTADOR DE PÁGINAS INDEPENDIENTES (Hogar, Catálogo de Productos, Sobre Nosotros, Contáctanos) ---
+function navigateTo(pageId, event, filter) {
+  if (event) {
+    event.preventDefault();
+  }
+
+  // Normalizar identificador
+  if (!pageId || pageId === '') pageId = 'hogar';
+  pageId = pageId.replace('#', '').replace('page-', '').trim();
+
+  // Compatibilidad: 'almacenar' ahora es 'catalogo'
+  if (pageId === 'almacenar') pageId = 'catalogo';
+
+  const validPages = ['hogar', 'catalogo', 'sobre-nosotros', 'contactanos'];
+  if (!validPages.includes(pageId)) {
+    pageId = 'hogar';
+  }
+
+  AppState.currentPage = pageId;
+
+  // Ocultar todas las páginas y mostrar únicamente la seleccionada
+  document.querySelectorAll('.page-view').forEach(view => {
+    view.classList.remove('active');
+    view.style.display = 'none';
+  });
+
+  const targetView = document.getElementById(`page-${pageId}`);
+  if (targetView) {
+    targetView.style.display = 'block';
+    // Forzar reflow para animación suave
+    void targetView.offsetWidth;
+    targetView.classList.add('active');
+  }
+
+  // Actualizar píldora activa en la barra de navegación
+  document.querySelectorAll('.nav-menu .nav-pill[data-page]').forEach(pill => {
+    if (pill.getAttribute('data-page') === pageId) {
+      pill.classList.add('active');
+    } else {
+      pill.classList.remove('active');
+    }
+  });
+
+  // Si se pasa un filtro de categoría (por ejemplo: 'auriculares' o 'bocinas')
+  if (filter) {
+    filterCategory(filter);
+  }
+
+  // Actualizar hash en la barra de direcciones del navegador
+  if (window.location.hash !== `#${pageId}`) {
+    history.pushState(null, null, `#${pageId}`);
+  }
+
+  // Desplazar al inicio de la página seleccionada
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  playSound('click');
+}
+
+// Escuchar cambios en la URL (Botones Atrás / Adelante del navegador)
+window.addEventListener('popstate', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    navigateTo(hash);
+  } else {
+    navigateTo('hogar');
+  }
+});
+
+// Inicializar enrutador según hash inicial
+function initPageRouter() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && ['hogar', 'catalogo', 'sobre-nosotros', 'contactanos'].includes(hash)) {
+    navigateTo(hash);
+  } else {
+    navigateTo('hogar');
+  }
+}
 
 // --- Web Audio API para Efectos de Sonido Sintetizados ---
 let audioCtx = null;
@@ -269,7 +349,6 @@ function formatPrice(baseMXN) {
   const converted = baseMXN * info.rate;
   
   if (AppState.currency === 'MXN') {
-    // Formato estándar mexicano: $2,999 MXN
     const formatted = Math.round(converted).toLocaleString('es-MX');
     return `${info.symbol}${formatted}${info.suffix}`;
   } else if (AppState.currency === 'INR') {
@@ -303,7 +382,6 @@ function updateAllPricesOnPage() {
   renderProducts();
 }
 
-// Actualizar opciones de Meses Sin Intereses en el modal de pago
 function updateInstallmentsOptions() {
   const { finalTotalMXN } = calculateCartTotals();
   const select = document.getElementById('installments-select');
@@ -380,7 +458,6 @@ function renderProducts() {
       </div>
 
       <div class="product-card-actions">
-        <!-- Botón verde idéntico a las capturas -->
         <button class="btn-green-buy" onclick="quickBuy('${p.id}')" title="Comprar ${p.name} inmediatamente">
           * Comprar ahora *
         </button>
@@ -517,10 +594,9 @@ function calculateCartTotals() {
   const subtotalMXN = AppState.cart.reduce((sum, item) => sum + (item.basePriceMXN * item.quantity), 0);
   const discountMXN = subtotalMXN * (AppState.discountPercentage / 100);
   
-  // Envío gratis a todo México si la compra supera $1,999 MXN o con cupón ENVIOGRATIS
   let shippingMXN = 0;
   if (subtotalMXN > 0 && subtotalMXN < 1999 && AppState.discountCode !== 'ENVIOGRATIS') {
-    shippingMXN = 149; // Tarifa estándar de paquetería en México
+    shippingMXN = 149;
   }
 
   const finalTotalMXN = Math.max(0, subtotalMXN - discountMXN + shippingMXN);
@@ -545,8 +621,8 @@ function renderCart() {
         </svg>
         <p style="font-size: 1.1rem; font-weight: 600; color: #475569; margin-bottom: 6px;">Tu carrito está vacío</p>
         <p style="font-size: 0.85rem; margin-bottom: 20px;">Explora nuestros auriculares y bocinas para agregar tus favoritos.</p>
-        <button class="btn-green-buy" onclick="closeCartDrawer(); window.location.hash = '#almacenar';">
-          Explorar Productos
+        <button class="btn-green-buy" onclick="closeCartDrawer(); navigateTo('catalogo');">
+          Explorar Catálogo de Productos
         </button>
       </div>
     `;
@@ -580,7 +656,7 @@ function renderCart() {
     </div>
   `).join('');
 
-  // Totales en Pesos Mexicanos (MXN)
+  // Totales
   const { subtotalMXN, discountMXN, shippingMXN, finalTotalMXN } = calculateCartTotals();
 
   document.getElementById('cart-subtotal-val').textContent = formatPrice(subtotalMXN);
@@ -604,7 +680,7 @@ function renderCart() {
 
   document.getElementById('cart-total-val').textContent = formatPrice(finalTotalMXN);
 
-  // Barra de progreso de envío gratis
+  // Barra de progreso
   const progressPercent = Math.min(100, Math.round((subtotalMXN / 1999) * 100));
   const progressFill = document.getElementById('shipping-progress-fill');
   const progressText = document.getElementById('shipping-progress-text');
@@ -677,7 +753,7 @@ function handleApplyCoupon() {
   renderCart();
 }
 
-// --- Pasarela de Pago con Tarjeta de Crédito / Débito (Modal & 3D Interactive Card) ---
+// --- Pasarela de Pago con Tarjeta de Crédito / Débito ---
 function openCheckoutModal() {
   if (AppState.cart.length === 0) {
     showToast('Tu carrito está vacío. Agrega productos para pagar.', 'error');
@@ -689,7 +765,6 @@ function openCheckoutModal() {
   if (modal) modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 
-  // Llenar resumen mini
   const miniList = document.getElementById('checkout-mini-items');
   const { finalTotalMXN } = calculateCartTotals();
 
@@ -713,7 +788,6 @@ function closeCheckoutModal() {
   document.body.style.overflow = '';
 }
 
-// Formateador y visualizador de tarjeta en tiempo real
 function setupVirtualCardListeners() {
   const cardElem = document.getElementById('interactive-card');
   const numInput = document.getElementById('card-number-input');
@@ -730,7 +804,6 @@ function setupVirtualCardListeners() {
 
   if (!cardElem || !numInput) return;
 
-  // Formato número de tarjeta con detección de marca (Visa, Mastercard, Amex)
   numInput.addEventListener('input', (e) => {
     let val = e.target.value.replace(/\D/g, '');
     if (val.length > 16) val = val.substring(0, 16);
@@ -775,7 +848,6 @@ function setupVirtualCardListeners() {
     displayExp.textContent = val ? val.padEnd(5, '•') : 'MM/AA';
   });
 
-  // Giro 3D realista al enfocar el campo CVV
   cvvInput.addEventListener('focus', () => {
     cardElem.classList.add('is-flipped');
   });
@@ -792,7 +864,6 @@ function setupVirtualCardListeners() {
   });
 }
 
-// Procesar el pago con tarjeta en pesos mexicanos
 function processCardPayment(e) {
   e.preventDefault();
 
@@ -837,7 +908,6 @@ function processCardPayment(e) {
   }, 2200);
 }
 
-// Mostrar Recibo / Confirmación de Compra en MXN
 function showOrderSuccessReceipt(cardNumber) {
   playSound('success');
 
@@ -911,7 +981,6 @@ function showOrderSuccessReceipt(cardNumber) {
     </div>
   `;
 
-  // Limpiar carrito tras compra exitosa
   AppState.cart = [];
   AppState.discountCode = null;
   AppState.discountPercentage = 0;
@@ -1033,7 +1102,7 @@ function initCarousel() {
   startTimer();
 }
 
-// --- Formularios de Contacto y Suscripción (Capturas 4, 5 y 6) ---
+// --- Formularios de Contacto y Suscripción ---
 function handleContactSubmit(e) {
   e.preventDefault();
   const firstName = document.getElementById('contact-first-name').value.trim();
@@ -1066,10 +1135,8 @@ function handleMissionSubscribe(e) {
   e.target.reset();
 }
 
-// --- Navegación, Scroll Spy y Botón Volver Arriba ---
+// --- Navegación y Botón Volver Arriba ---
 function initNavigation() {
-  const pills = document.querySelectorAll('.nav-menu .nav-pill[data-target]');
-  const sections = document.querySelectorAll('.page-section');
   const stickyNav = document.getElementById('main-nav');
   const scrollTopBtn = document.getElementById('scroll-to-top');
 
@@ -1087,22 +1154,6 @@ function initNavigation() {
     } else {
       scrollTopBtn.classList.remove('visible');
     }
-
-    sections.forEach(sec => {
-      const top = sec.offsetTop - 140;
-      const height = sec.offsetHeight;
-      const id = sec.getAttribute('id');
-
-      if (scrollPos >= top && scrollPos < top + height) {
-        pills.forEach(p => {
-          if (p.getAttribute('data-target') === id) {
-            p.classList.add('active');
-          } else {
-            p.classList.remove('active');
-          }
-        });
-      }
-    });
   });
 
   if (scrollTopBtn) {
@@ -1111,18 +1162,6 @@ function initNavigation() {
       playSound('click');
     });
   }
-
-  pills.forEach(p => {
-    p.addEventListener('click', (e) => {
-      const targetId = p.getAttribute('data-target');
-      const targetSec = document.getElementById(targetId);
-      if (targetSec) {
-        e.preventDefault();
-        targetSec.scrollIntoView({ behavior: 'smooth' });
-        playSound('click');
-      }
-    });
-  });
 }
 
 // --- Inicialización Principal ---
@@ -1134,6 +1173,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
   initNavigation();
   setupVirtualCardListeners();
+  initPageRouter();
 
   // Selector de moneda
   const currSelector = document.getElementById('currency-selector');
@@ -1190,7 +1230,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (floatingCartBtn) floatingCartBtn.addEventListener('click', openCartDrawer);
   if (closeCartBtn) closeCartBtn.addEventListener('click', closeCartDrawer);
   if (clearCartBtn) clearCartBtn.addEventListener('click', clearCart);
-  if (continueShoppingBtn) continueShoppingBtn.addEventListener('click', closeCartDrawer);
+  if (continueShoppingBtn) continueShoppingBtn.addEventListener('click', () => {
+    closeCartDrawer();
+    navigateTo('catalogo');
+  });
   if (proceedCheckoutBtn) proceedCheckoutBtn.addEventListener('click', openCheckoutModal);
   if (applyCouponBtn) applyCouponBtn.addEventListener('click', handleApplyCoupon);
 
