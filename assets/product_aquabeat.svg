@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="aquaBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="50%" stop-color="#0369a1"/>
+      <stop offset="100%" stop-color="#0c4a6e"/>
+    </linearGradient>
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <filter id="shadowA" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <circle cx="200" cy="200" r="170" fill="#f0f9ff"/>
+  <ellipse cx="200" cy="325" rx="90" ry="18" fill="#bae6fd" opacity="0.6"/>
+
+  <g filter="url(#shadowA)">
+    <!-- Outdoor Carabiner Hook (Orange) -->
+    <path d="M150 90 C150 60 210 50 240 80 C260 100 240 130 220 120" fill="none" stroke="#f97316" stroke-width="12" stroke-linecap="round"/>
+    <rect x="180" y="55" width="22" height="14" rx="2" fill="#cbd5e1"/>
+
+    <!-- Rugged Body with Bumper Corners -->
+    <rect x="120" y="120" width="160" height="160" rx="30" fill="url(#aquaBody)"/>
+    <rect x="115" y="115" width="170" height="170" rx="34" fill="none" stroke="#075985" stroke-width="6"/>
+
+    <!-- Water Splash Waves Symbol -->
+    <circle cx="200" cy="200" r="50" fill="#0369a1"/>
+    
+    <path d="M175 200 Q188 185 200 200 T225 200" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M170 215 Q185 200 200 215 T230 215" fill="none" stroke="#e0f2fe" stroke-width="3" stroke-linecap="round"/>
+    <path d="M180 185 Q190 175 200 185 T220 185" fill="none" stroke="#bae6fd" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- IPX7 Waterproof Badge -->
+    <rect x="175" y="250" width="50" height="18" rx="4" fill="#0284c7"/>
+    <text x="200" y="262" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">IPX7</text>
+  </g>
+</svg>
